@@ -6,58 +6,88 @@
     <title>Official Authentication | Pearson PEIC</title>
     <style>
         :root {
-            --p-blue: #003057;
-            --p-teal: #007fa3;
+            --p-blue: #003057; /* Azul Corporativo Pearson */
+            --p-teal: #007fa3; /* Turquesa Corporativo Pearson */
+            --p-light-blue: #e6f7ff;
         }
 
         body {
-            background-color: #f4f7f9;
-            font-family: 'Open Sans', Arial, sans-serif;
+            background-color: #f0f4f7;
+            font-family: 'Open Sans', 'Segoe UI', Arial, sans-serif;
             margin: 0; padding: 20px;
-            display: flex; justify-content: center;
+            display: flex; justify-content: center; align-items: start;
+            min-height: 100vh;
         }
 
         .cert-container {
-            width: 100%; max-width: 500px;
-            background: white; border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            overflow: hidden; border-top: 8px solid var(--p-teal);
+            width: 100%; max-width: 480px;
+            background: white; border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            overflow: hidden; border-top: 6px solid var(--p-teal);
         }
 
-        .header { padding: 30px; text-align: center; border-bottom: 1px solid #eee; }
-        /* Ajuste de tamaño para el PNG */
-        .header img { max-height: 55px; width: auto; margin-bottom: 10px; }
+        /* Cabecera solo con texto corporativo */
+        .header { 
+            padding: 25px 20px; 
+            text-align: center; 
+            background-color: white;
+            border-bottom: 1px solid #eaeaea;
+        }
+        .brand-text {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--p-blue);
+            letter-spacing: -1px;
+            margin: 0;
+        }
+        .brand-text span {
+            color: var(--p-teal);
+            font-weight: 300;
+            margin: 0 5px;
+        }
+        .report-title {
+            font-size: 0.8rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 5px;
+            font-weight: 600;
+        }
         
         .content { padding: 30px; }
-        h1 { color: var(--p-blue); font-size: 1.4rem; margin-top: 0; text-align: center; }
+        h1 { color: var(--p-blue); font-size: 1.4rem; margin-top: 0; text-align: center; margin-bottom: 25px; }
 
         .info-grid { display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 25px; }
         .info-item { border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; }
         .label { font-size: 0.7rem; color: var(--p-teal); font-weight: bold; text-transform: uppercase; }
-        .value { font-size: 1rem; color: var(--p-blue); font-weight: 600; display: block; }
+        .value { font-size: 1rem; color: var(--p-blue); font-weight: 600; display: block; margin-top: 2px; }
 
-        .score-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        .score-table th { text-align: left; font-size: 0.8rem; color: #666; padding: 10px; border-bottom: 2px solid var(--p-blue); }
-        .score-table td { padding: 12px 10px; border-bottom: 1px solid #eee; font-size: 0.95rem; }
+        .score-table { width: 100%; border-collapse: collapse; margin-top: 20px; background: #fff; }
+        .score-table th { text-align: left; font-size: 0.8rem; color: #666; padding: 12px; border-bottom: 2px solid var(--p-blue); }
+        .score-table td { padding: 14px 12px; border-bottom: 1px solid #eee; font-size: 0.95rem; }
         .skill { font-weight: bold; color: var(--p-blue); }
-        .level-tag { background: var(--p-teal); color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; }
+        .level-tag { background: var(--p-teal); color: white; padding: 3px 10px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
 
         #btn-verify {
             width: 100%; padding: 16px; background: var(--p-teal); color: white;
-            border: none; border-radius: 4px; font-weight: bold; cursor: pointer;
-            margin-top: 25px; text-transform: uppercase;
+            border: none; border-radius: 6px; font-weight: bold; cursor: pointer;
+            margin-top: 30px; text-transform: uppercase; font-size: 0.9rem;
+            transition: background 0.2s, transform 0.1s;
         }
+        #btn-verify:hover { background: var(--p-blue); }
+        #btn-verify:active { transform: translateY(1px); }
 
-        #result { display: none; margin-top: 20px; padding: 15px; background: #e6f4ea; border: 1px solid #28a745; border-radius: 4px; text-align: center; }
-        .success { color: #1e7e34; font-weight: bold; }
+        #result { display: none; margin-top: 25px; padding: 20px; background: #e6f4ea; border: 1px solid #28a745; border-radius: 8px; text-align: center; }
+        .success { color: #1e7e34; font-weight: bold; font-size: 1.1rem; margin-bottom: 5px; }
+        .verification-meta { font-size: 0.75rem; color: #555; line-height: 1.4; }
     </style>
 </head>
 <body>
 
 <div class="cert-container">
     <div class="header">
-        <img src="logo-pearson.png" alt="Pearson Official Logo">
-        <div style="font-weight: 800; color: var(--p-blue); font-size: 0.85rem;">OFFICIAL SCORE REPORT</div>
+        <div class="brand-text">PEARSON<span>|</span>PEIC</div>
+        <div class="report-title">OFFICIAL SCORE REPORT</div>
     </div>
 
     <div class="content">
@@ -91,7 +121,7 @@
                 <tr><td class="skill">Reading</td><td>35</td><td><span class="level-tag">A2</span></td></tr>
                 <tr><td class="skill">Speaking</td><td>45</td><td><span class="level-tag">B1</span></td></tr>
                 <tr><td class="skill">Writing</td><td>42</td><td><span class="level-tag">B1</span></td></tr>
-                <tr style="background: #f9f9f9;"><td class="skill">Overall Score</td><td><strong>45</strong></td><td><strong>B1</strong></td></tr>
+                <tr style="background: #fdfdfd; border-top: 2px solid #eee;"><td class="skill" style="font-size: 1.1rem;">Overall Score</td><td style="font-size: 1.1rem;"><strong>45</strong></td><td><strong>B1</strong></td></tr>
             </tbody>
         </table>
 
@@ -99,19 +129,23 @@
 
         <div id="result">
             <div class="success">✓ RECORD VERIFIED & LEGITIMATE</div>
-            <p style="font-size: 0.75rem; color: #666;">This score report is authentic and matches our global records as of <span id="date"></span>.</p>
+            <p class="verification-meta">This score report is authentic and matches our global records for the Pearson English International Certificate (PEIC) as of <span id="date"></span>.</p>
         </div>
     </div>
 </div>
 
 <script>
     function verify() {
-        document.getElementById('btn-verify').innerText = 'Verifying...';
+        const btn = document.getElementById('btn-verify');
+        btn.innerText = 'Verifying Record...';
+        btn.style.opacity = '0.7';
+        btn.disabled = true;
+        
         setTimeout(() => {
-            document.getElementById('btn-verify').style.display = 'none';
+            btn.style.display = 'none';
             document.getElementById('result').style.display = 'block';
             document.getElementById('date').innerText = new Date().toUTCString();
-        }, 1000);
+        }, 1200);
     }
 </script>
 
